@@ -13,7 +13,7 @@ namespace MegStore.Core.Entities.Users
     }
     public enum Role
     {
-        Admin, Client
+        Admin, Customer
     }
     public enum Gender
     {

@@ -150,3 +150,8 @@ C:\Users\megbl\Source\Repos\MegStore\MegStore\obj\Debug\net8.0\MegStore.Presenta
 C:\Users\megbl\Source\Repos\MegStore\MegStore\obj\Debug\net8.0\ref\MegStore.Presentation.dll
 C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\MailKit.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\MimeKit.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore\bin\Debug\net8.0\System.Formats.Asn1.dll
