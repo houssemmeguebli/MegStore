@@ -1675,6 +1675,10 @@
       "MegStore.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MegStore.Core": "1.0.0",
+          "MegStore.Infrastructure": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/MegStore.Application.dll": {}
         },

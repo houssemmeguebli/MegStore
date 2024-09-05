@@ -31,7 +31,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj": {
+                "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj"
+              },
+              "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
