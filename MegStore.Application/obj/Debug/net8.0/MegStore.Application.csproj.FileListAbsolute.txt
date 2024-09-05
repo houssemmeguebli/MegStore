@@ -10,3 +10,9 @@ C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\MegSt
 C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\refint\MegStore.Application.dll
 C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\MegStore.Application.pdb
 C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\ref\MegStore.Application.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\bin\Debug\net8.0\MegStore.Core.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\bin\Debug\net8.0\MegStore.Infrastructure.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\bin\Debug\net8.0\MegStore.Core.pdb
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\bin\Debug\net8.0\MegStore.Infrastructure.pdb
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\MegStore.Application.csproj.AssemblyReference.cache
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Application\obj\Debug\net8.0\MegStore.Application.csproj.CopyComplete

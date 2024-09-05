@@ -14,7 +14,7 @@ namespace MegStore.Core.Entities.ProductFolder
         public string productName { get; set; }
         public string productDescription { get; set; } 
         public decimal productPrice { get; set; }
-        public string ImageUrl { get; set; } 
+        public string? ImageUrl { get; set; } 
         public int StockQuantity { get; set; } 
         public DateTime DateAdded { get; set; } = DateTime.Now;
 
@@ -22,12 +22,12 @@ namespace MegStore.Core.Entities.ProductFolder
 
         [ForeignKey(nameof(Category))]
         public long? categoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
         public IList<Order> Orders { get; set; } = new List<Order>();
 
         [ForeignKey(nameof(admin))]
         public long? adminId { get; set; }
-        public Admin admin  { get; set; }
+        public Admin? admin  { get; set; }
 
 
     }
