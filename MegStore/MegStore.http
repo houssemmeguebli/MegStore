@@ -1,0 +1,6 @@
+@MegStore_HostAddress = http://localhost:5189
+
+GET {{MegStore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
