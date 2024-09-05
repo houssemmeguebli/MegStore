@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RRPZGkGnDHHf9DOTOGXHcWOK7HJtQhEAMMzLDV/ilxPEGvKu56iJKK8Ss8PbjJhnbCkJCih1pUaiyf6qTM8jNg==",
+  "dgSpecHash": "u5V71A9i/WEtmJ8vRhJPmfnm7CWz39K06CKvMaSqqbyI6gPmsdpF+8BL/sEbPr4QyzjWZkDpqAKjG8QdcGD3mQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
+  "projectFilePath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\megbl\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.8\\microsoft.aspnetcore.cryptography.internal.8.0.8.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.8\\microsoft.aspnetcore.cryptography.keyderivation.8.0.8.nupkg.sha512",

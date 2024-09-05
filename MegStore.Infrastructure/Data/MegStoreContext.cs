@@ -18,12 +18,28 @@ namespace MegStore.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public MegStoreContext(DbContextOptions<MegStoreContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MegStoreContext).Assembly);
             base.OnModelCreating(modelBuilder);
+            // Apply column type configuration for Cart entity
+            modelBuilder.Entity<Cart>()
+                .Property(c => c.TotalAmount)
+                .HasColumnType("decimal(18,2)");
+
+            // Apply column type configuration for Product entity
+            modelBuilder.Entity<Product>()
+                .Property(p => p.productPrice)
+                .HasColumnType("decimal(18,2)");
+
+            base.OnModelCreating(modelBuilder);
         }
 
     }
+
 }
+

@@ -1,0 +1,16 @@
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\bin\Debug\net8.0\MegStore.Infrastructure.deps.json
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\bin\Debug\net8.0\MegStore.Infrastructure.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\bin\Debug\net8.0\MegStore.Infrastructure.pdb
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\bin\Debug\net8.0\MegStore.Core.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\bin\Debug\net8.0\MegStore.Core.pdb
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.AssemblyInfo.cs
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.sourcelink.json
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.csproj.CopyComplete
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\refint\MegStore.Infrastructure.dll
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\MegStore.Infrastructure.pdb
+C:\Users\megbl\Source\Repos\MegStore\MegStore.Infrastructure\obj\Debug\net8.0\ref\MegStore.Infrastructure.dll

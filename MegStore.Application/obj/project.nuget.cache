@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nmDwiAKpl2ywUjaXB2fTvCpG8lPqEFftRQqRAYgbA8F6mtIPXYZYMAjkhtwM6/YLdI+b+3FDvERBIWXtnV9I+w==",
+  "dgSpecHash": "0XiXtT70kM75reXKR3EAgtLu75A7fMWnnZhMUUfewD3RAoqdc4uvpe3KBVKgUGQVX1mJIMus9qIc2HOd2XE2OQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Application\\MegStore.Application.csproj",
+  "projectFilePath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Application\\MegStore.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

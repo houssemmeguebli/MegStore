@@ -821,11 +821,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
+      "projectUniqueName": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
       "projectName": "MegStore.Core",
-      "projectPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
+      "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
       "packagesPath": "C:\\Users\\megbl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\obj\\",
+      "outputPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj": {}
+    "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj": {
+    "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
+        "projectUniqueName": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
         "projectName": "MegStore.Core",
-        "projectPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
+        "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj",
         "packagesPath": "C:\\Users\\megbl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\obj\\",
+        "outputPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj": {
+    "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj",
         "projectName": "MegStore.Infrastructure",
-        "projectPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\MegStore.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\megbl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj": {
-                "projectPath": "C:\\Users\\megbl\\Desktop\\MegStore\\MegStore\\MegStore.Core\\MegStore.Core.csproj"
+              "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj": {
+                "projectPath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore.Core\\MegStore.Core.csproj"
               }
             }
           }
@@ -118,6 +118,10 @@
               "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
             }
