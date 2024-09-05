@@ -31,7 +31,7 @@ namespace MegStore.Core.Entities.Users
         public Gender gender;
         public string? PasswordResetCode { get; set; }
         public DateTime? PasswordResetCodeExpiration { get; set; }
-        public DateTime dateOfCreation { get; set; }
+        public DateTime dateOfCreation { get; set; } = DateTime.Now;
 
 
     }

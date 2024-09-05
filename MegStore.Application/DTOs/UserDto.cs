@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MegStore.Application.DTOs
 {
-    public class RegisterModel
+    public class UserDto
     {
+        public long Id { get; set; } 
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -17,8 +18,8 @@ namespace MegStore.Application.DTOs
         public string Address { get; set; }
         public Gender Gender { get; set; }
         public Role Role { get; set; }
-      
+        public UserStatus  Status { get; set; }
         public DateTime dateOfCreation { get; set; } = DateTime.Now;
-    }
 
+    }
 }

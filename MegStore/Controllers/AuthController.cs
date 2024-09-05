@@ -44,7 +44,9 @@ namespace MegStore.Presentation.Controllers
                 address = model.Address,
                 gender = model.Gender,
                 role=model.Role,
+                dateOfCreation=model.dateOfCreation,
                 userStatus = UserStatus.Active 
+
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
