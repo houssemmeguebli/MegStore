@@ -9,5 +9,9 @@ namespace MegStore.Core.Interfaces
 {
     public interface IOrderService :  IService<Order>
     {
+        Task<Order> GetOrderByIdAsync(long orderId);
+        Task<IEnumerable<Order>> GetAllOrdersAsync();
+        Task RemoveProductFromOrderAsync(long orderId, long productId);
+        Task UpdateProductInOrderListAsync(long orderId, long productId, int newQuantity);
     }
 }

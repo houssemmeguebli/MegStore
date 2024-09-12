@@ -8,7 +8,7 @@ namespace MegStore.Application.DTOs
 {
     public class CartDto
     {
-        public int CartId { get; set; }
+        public long CartId { get; set; }
         public int Quantity { get; set; }
         public DateTime DateCreated { get; set; }
         public IList<ProductDto> Products { get; set; } = new List<ProductDto>();

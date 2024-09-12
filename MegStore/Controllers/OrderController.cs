@@ -2,6 +2,7 @@
 using MegStore.Application.DTOs;
 using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using MegStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -130,5 +131,53 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting order: {ex.Message}");
             }
         }
+        // GET api/orders/{id}
+        [HttpGet("Orderproducts/{id}")]
+        public async Task<IActionResult> GetOrderproductsById(long id)
+        {
+            var order = await _orderService.GetOrderByIdAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Map the Order entity to OrderDto
+            var orderDto = _mapper.Map<OrderDto>(order);
+
+            return Ok(orderDto);
+        }
+        [HttpDelete("{orderId}/products/{productId}")]
+        public async Task<IActionResult> RemoveProductFromOrder(long orderId, long productId)
+        {
+            try
+            {
+                await _orderService.RemoveProductFromOrderAsync(orderId, productId);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+        [HttpPut("{orderId}/products/{productId}")]
+        public async Task<IActionResult> UpdateProductInOrder(long orderId, long productId,int newQuantity)
+        {
+            if (newQuantity == null ||  newQuantity < 1)
+            {
+                return BadRequest(new { message = "Invalid product quantity" });
+            }
+
+            try
+            {
+                await _orderService.UpdateProductInOrderListAsync(orderId, productId, newQuantity);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
     }
 }

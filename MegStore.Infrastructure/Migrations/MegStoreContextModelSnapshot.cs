@@ -73,11 +73,40 @@ namespace MegStore.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("orderId"));
 
+                    b.Property<string>("CustomerAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalProducts")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotlaAmount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<long?>("customerId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("orderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("orderNotes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("orderStatus")
                         .HasColumnType("int");
@@ -111,6 +140,9 @@ namespace MegStore.Infrastructure.Migrations
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
+
+                    b.Property<int>("ItemQuantiy")
+                        .HasColumnType("int");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");

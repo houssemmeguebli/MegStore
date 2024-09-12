@@ -21,6 +21,14 @@ namespace MegStore.Core.Entities.ProductFolder
         public DateTime? shippedDate { get; set; }
 
         public OrderStatus orderStatus { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhone { get; set; } 
+        public string orderNotes { get; set; }
+        public decimal TotlaAmount { get; set; }
+        public int TotalProducts { get; set; }
+        public int Quantity { get; set; }
 
         [ForeignKey(nameof(Category))]
         public long? customerId { get; set; }

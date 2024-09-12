@@ -14,8 +14,10 @@ namespace MegStore.Core.Entities.ProductFolder
         public string productName { get; set; }
         public string productDescription { get; set; } 
         public decimal productPrice { get; set; }
-        public string? ImageUrl { get; set; } 
-        public int StockQuantity { get; set; } 
+        public string? ImageUrl { get; set; }
+        public int StockQuantity { get; set; }
+        public int ItemQuantiy { get; set; }
+
         public DateTime DateAdded { get; set; } = DateTime.Now;
 
         public bool IsAvailable { get; set; }

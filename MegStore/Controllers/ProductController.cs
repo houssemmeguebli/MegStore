@@ -62,7 +62,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ProductDto>> CreateProduct(ProductDto productDto)
+    public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] ProductDto productDto, IFormFile imageFile)
     {
         try
         {
@@ -71,10 +71,46 @@ public class ProductController : ControllerBase
                 return BadRequest(ModelState);
             }
 
+            string imageUrl = null;
+
+            // If an image file is uploaded, save it
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine("wwwroot", "uploads", "products");
+
+                // Ensure the uploads folder exists
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Generate a unique filename for the uploaded file
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(imageFile.FileName);
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Save the file to the server
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStream);
+                }
+
+                // Generate the URL for the uploaded image (assuming you serve images from the 'wwwroot' folder)
+                imageUrl = Path.Combine("uploads", "products", uniqueFileName).Replace("\\", "/");
+            }
+
+            // Map the product DTO to the Product entity
             var product = _mapper.Map<Product>(productDto);
+
+            // Set the imageUrl in the product if it was uploaded
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                product.ImageUrl = imageUrl;
+            }
+
+            // Save the product to the database
             await _productService.AddAsync(product);
 
-            // Refresh the product object to get the updated values, such as ID
+            // Refresh the product object to get the updated values (such as the ID)
             var createdProduct = await _productService.GetByIdAsync(product.productId);
             var createdProductDto = _mapper.Map<ProductDto>(createdProduct);
 
@@ -85,6 +121,7 @@ public class ProductController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding product: {ex.Message}");
         }
     }
+
 
     [HttpPut("{productId}")]
     public async Task<IActionResult> UpdateProduct(long productId, ProductDto productDto)

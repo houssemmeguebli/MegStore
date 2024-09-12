@@ -18,5 +18,7 @@ namespace MegStore.Application.DTOs
         public bool IsAvailable { get; set; }
         public long? CategoryId { get; set; }
         public long? AdminId { get; set; }
+        public int ItemQuantiy { get; set; }
+
     }
 }

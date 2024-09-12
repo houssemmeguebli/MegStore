@@ -24,6 +24,15 @@ builder.Services.AddDbContext<MegStoreContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddEntityFrameworkStores<MegStoreContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 
 // Register application services
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
@@ -123,6 +132,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication(); // Make sure authentication is enabled
@@ -131,6 +141,7 @@ app.UseAuthorization();
 app.MapControllers();
 // Apply CORS policy
 app.UseCors("AllowSpecificOrigin");
-
+app.UseCors("AllowAllOrigins");
+app.UseStaticFiles();
 
 app.Run();

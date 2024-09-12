@@ -21,8 +21,14 @@ namespace MegStore.Application.DTOs
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public DateTime? ShippedDate { get; set; }
         public OrderStatus OrderStatus { get; set; }
-
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhone { get; set; }
+        public string orderNotes { get; set; }
+        public decimal TotlaAmount { get; set; }
         public long? CustomerId { get; set; }
+        public int Quantity { get; set; }
         public IList<ProductDto> Products { get; set; } = new List<ProductDto>();
     }
  

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MegStore.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d82f9aa455a3875cadb99fdc90a55c2d3f36500")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4781372575559e9c4eb4be450bc62cdf6485ca0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MegStore.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MegStore.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
