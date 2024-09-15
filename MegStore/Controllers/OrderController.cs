@@ -2,9 +2,9 @@
 using MegStore.Application.DTOs;
 using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
-using MegStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +17,14 @@ namespace MegStore.Presentation.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IOrderItemService _orderItemService;
         private readonly IMapper _mapper;
 
-        public OrderController(IOrderService orderService, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper, IOrderItemService orderItemService)
         {
             _orderService = orderService;
             _mapper = mapper;
+            _orderItemService = orderItemService;
         }
 
         [HttpGet]
@@ -30,7 +32,7 @@ namespace MegStore.Presentation.Controllers
         {
             try
             {
-                var orders = await _orderService.GetAllAsync();
+                var orders = await _orderService.GetAllOrdersAsync();
                 if (orders == null || !orders.Any())
                 {
                     return NotFound("There are no orders.");
@@ -49,7 +51,7 @@ namespace MegStore.Presentation.Controllers
         {
             try
             {
-                var order = await _orderService.GetByIdAsync(orderId);
+                var order = await _orderService.GetOrderByIdAsync(orderId);
                 if (order == null)
                 {
                     return NotFound("There is no order with this ID.");
@@ -62,7 +64,6 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving order: {ex.Message}");
             }
         }
-
         [HttpPost]
         public async Task<ActionResult<OrderDto>> CreateOrder(OrderDto orderDto)
         {
@@ -73,10 +74,23 @@ namespace MegStore.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
+                // Map OrderDto to Order entity (including OrderItems)
                 var order = _mapper.Map<Order>(orderDto);
+
+                // Ensure that order items have the correct OrderId and calculate total price
+                foreach (var item in order.OrderItems)
+                {
+                    item.OrderId = order.orderId; // Make sure each order item has the correct order ID
+                    item.TotalPrice = item.Quantity * item.UnitPrice; // Calculate the total price for each item
+                }
+
+                // Add the order with items in a single AddAsync call
                 await _orderService.AddAsync(order);
+
+                // Map the created order back to OrderDto
                 var createdOrderDto = _mapper.Map<OrderDto>(order);
 
+                // Return the created order details
                 return CreatedAtAction(nameof(GetOrderById), new { orderId = createdOrderDto.OrderId }, createdOrderDto);
             }
             catch (Exception ex)
@@ -84,31 +98,36 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding order: {ex.Message}");
             }
         }
-
         [HttpPut("{orderId}")]
-        public async Task<IActionResult> UpdateOrder(long orderId, OrderDto orderDto)
+        public async Task<IActionResult> UpdateOrder(long orderId, [FromBody] Order orderDto)
         {
+            if (orderDto == null)
+            {
+                return BadRequest("Order data is null.");
+            }
+
+            if (orderId <= 0)
+            {
+                return BadRequest("Invalid order ID.");
+            }
+
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var existingOrder = await _orderService.GetByIdAsync(orderId);
-                if (existingOrder == null)
-                {
-                    return NotFound("Order not found.");
-                }
-
-                _mapper.Map(orderDto, existingOrder); // Map the incoming DTO to the existing order entity
-                await _orderService.UpdateAsync(existingOrder);
-
-                return NoContent(); // 204 No Content for successful updates
+                await _orderService.UpdateOrderWithItemsAsync(orderId, orderDto);
+                return Ok("Order updated successfully.");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error updating order: {ex.Message}");
+                // Log exception (ex) here if needed
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the order.");
             }
         }
 
@@ -117,7 +136,7 @@ namespace MegStore.Presentation.Controllers
         {
             try
             {
-                var order = await _orderService.GetByIdAsync(orderId);
+                var order = await _orderService.GetOrderByIdAsync(orderId);
                 if (order == null)
                 {
                     return NotFound("Order not found.");
@@ -131,53 +150,48 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting order: {ex.Message}");
             }
         }
-        // GET api/orders/{id}
+
         [HttpGet("Orderproducts/{id}")]
         public async Task<IActionResult> GetOrderproductsById(long id)
         {
-            var order = await _orderService.GetOrderByIdAsync(id);
-
-            if (order == null)
+            try
             {
-                return NotFound();
+                var order = await _orderService.GetOrderByIdAsync(id);
+
+                if (order == null)
+                {
+                    return NotFound("Order not found.");
+                }
+
+                // Map the Order entity to OrderDto
+                var orderDto = _mapper.Map<OrderDto>(order);
+
+                return Ok(orderDto);
             }
-
-            // Map the Order entity to OrderDto
-            var orderDto = _mapper.Map<OrderDto>(order);
-
-            return Ok(orderDto);
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving order products: {ex.Message}");
+            }
         }
+
         [HttpDelete("{orderId}/products/{productId}")]
         public async Task<IActionResult> RemoveProductFromOrder(long orderId, long productId)
         {
             try
             {
+                // Use the updated RemoveProductFromOrderAsync to remove the product from the order via OrderItem
                 await _orderService.RemoveProductFromOrderAsync(orderId, productId);
-                return NoContent();
+                return NoContent(); // 204 No Content indicates successful removal
             }
             catch (KeyNotFoundException ex)
             {
-                return NotFound(new { message = ex.Message });
+                return NotFound(new { message = ex.Message }); // 404 Not Found if the order or product is missing
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as necessary for debugging
+                return StatusCode(500, "An error occurred while removing the product from the order"); // 500 Internal Server Error
             }
         }
-        [HttpPut("{orderId}/products/{productId}")]
-        public async Task<IActionResult> UpdateProductInOrder(long orderId, long productId,int newQuantity)
-        {
-            if (newQuantity == null ||  newQuantity < 1)
-            {
-                return BadRequest(new { message = "Invalid product quantity" });
-            }
-
-            try
-            {
-                await _orderService.UpdateProductInOrderListAsync(orderId, productId, newQuantity);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
-        }
-
     }
 }

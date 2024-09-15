@@ -114,7 +114,7 @@ public class ProductController : ControllerBase
             var createdProduct = await _productService.GetByIdAsync(product.productId);
             var createdProductDto = _mapper.Map<ProductDto>(createdProduct);
 
-            return CreatedAtAction(nameof(GetProductById), new { productId = createdProductDto.ProductId }, createdProductDto);
+            return CreatedAtAction(nameof(GetProductById), new { productId = createdProductDto.productId }, createdProductDto);
         }
         catch (Exception ex)
         {

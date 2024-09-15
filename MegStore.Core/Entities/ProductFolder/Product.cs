@@ -25,11 +25,11 @@ namespace MegStore.Core.Entities.ProductFolder
         [ForeignKey(nameof(Category))]
         public long? categoryId { get; set; }
         public Category? Category { get; set; }
-        public IList<Order> Orders { get; set; } = new List<Order>();
 
         [ForeignKey(nameof(admin))]
         public long? adminId { get; set; }
         public Admin? admin  { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
 
 
     }

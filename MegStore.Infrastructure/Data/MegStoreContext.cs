@@ -18,6 +18,8 @@ namespace MegStore.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
         public MegStoreContext(DbContextOptions<MegStoreContext> options) : base(options)
         {
         }
@@ -35,7 +37,17 @@ namespace MegStore.Infrastructure.Data
             modelBuilder.Entity<Product>()
                 .Property(p => p.productPrice)
                 .HasColumnType("decimal(18,2)");
+            modelBuilder.Entity<Order>()
+        .HasKey(o => o.orderId); // Primary Key
 
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderItems)
+                .WithOne(oi => oi.Order)
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.ClientNoAction); // Adjust the delete behavior as needed
+
+            modelBuilder.Entity<OrderItem>()
+                .HasKey(oi => oi.OrderItemId); // Primary Key for OrderItem
             base.OnModelCreating(modelBuilder);
         }
 

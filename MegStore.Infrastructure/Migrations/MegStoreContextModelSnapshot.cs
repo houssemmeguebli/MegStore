@@ -121,6 +121,38 @@ namespace MegStore.Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.OrderItem", b =>
+                {
+                    b.Property<long>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("OrderItemId"));
+
+                    b.Property<long?>("OrderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Product", b =>
                 {
                     b.Property<long>("productId")
@@ -411,21 +443,6 @@ namespace MegStore.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.Property<long>("OrdersorderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ProductsproductId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("OrdersorderId", "ProductsproductId");
-
-                    b.HasIndex("ProductsproductId");
-
-                    b.ToTable("OrderProduct");
-                });
-
             modelBuilder.Entity("MegStore.Core.Entities.Users.Admin", b =>
                 {
                     b.HasBaseType("MegStore.Core.Entities.Users.User");
@@ -447,6 +464,22 @@ namespace MegStore.Infrastructure.Migrations
                         .HasForeignKey("customerId");
 
                     b.Navigation("customer");
+                });
+
+            modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.OrderItem", b =>
+                {
+                    b.HasOne("MegStore.Core.Entities.ProductFolder.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.ClientNoAction);
+
+                    b.HasOne("MegStore.Core.Entities.ProductFolder.Product", "Product")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Product", b =>
@@ -519,21 +552,6 @@ namespace MegStore.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("MegStore.Core.Entities.ProductFolder.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersorderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MegStore.Core.Entities.ProductFolder.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsproductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Cart", b =>
                 {
                     b.Navigation("Products");
@@ -542,6 +560,16 @@ namespace MegStore.Infrastructure.Migrations
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Product", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

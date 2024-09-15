@@ -32,9 +32,9 @@ namespace MegStore.Core.Entities.ProductFolder
 
         [ForeignKey(nameof(Category))]
         public long? customerId { get; set; }
-        public Customer customer { get; set; }
+        public Customer? customer { get; set; }
 
-        public IList<Product> Products { get; set; } = new List<Product>(); 
+        public ICollection<OrderItem> OrderItems { get; set; }
 
 
     }

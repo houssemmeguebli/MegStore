@@ -1,12 +1,20 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg"
+    },
+    {
       "Id": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\0c04be11-4b41-416c-99ca-813dc15147b6_spring-boot-icon-2048x2046-hlpnsm8r.png",
       "PackagePath": "staticwebassets\\uploads\\products\\0c04be11-4b41-416c-99ca-813dc15147b6_spring-boot-icon-2048x2046-hlpnsm8r.png"
     },
     {
       "Id": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\147e63ec-e989-465c-851d-216b5c3d4797_logo.png",
       "PackagePath": "staticwebassets\\uploads\\products\\147e63ec-e989-465c-851d-216b5c3d4797_logo.png"
+    },
+    {
+      "Id": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\3ca54135-d945-47d9-9255-c1c64d8509ac_C.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\3ca54135-d945-47d9-9255-c1c64d8509ac_C.jpg"
     },
     {
       "Id": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\511f700c-2da0-4bc2-a1aa-bea255afab82_test.jpg",

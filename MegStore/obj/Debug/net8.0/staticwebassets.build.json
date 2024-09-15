@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EpBp8IqrZNE1056j3LLBwFDHq7Loulk0LdN8OhX0EWU=",
+  "Hash": "YAzmUgxCa41d/X0IliNdRGh8dxt3BdtSxLgMPiuRL50=",
   "Source": "MegStore.Presentation",
   "BasePath": "_content/MegStore.Presentation",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg",
+      "SourceId": "MegStore.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\",
+      "BasePath": "_content/MegStore.Presentation",
+      "RelativePath": "uploads/products/07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg"
+    },
     {
       "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\0c04be11-4b41-416c-99ca-813dc15147b6_spring-boot-icon-2048x2046-hlpnsm8r.png",
       "SourceId": "MegStore.Presentation",
@@ -53,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\147e63ec-e989-465c-851d-216b5c3d4797_logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\3ca54135-d945-47d9-9255-c1c64d8509ac_C.jpg",
+      "SourceId": "MegStore.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\",
+      "BasePath": "_content/MegStore.Presentation",
+      "RelativePath": "uploads/products/3ca54135-d945-47d9-9255-c1c64d8509ac_C.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\3ca54135-d945-47d9-9255-c1c64d8509ac_C.jpg"
     },
     {
       "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\511f700c-2da0-4bc2-a1aa-bea255afab82_test.jpg",

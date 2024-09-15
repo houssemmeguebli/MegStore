@@ -1,10 +1,8 @@
-﻿using MegStore.Core.Entities.ProductFolder;
+﻿using MegStore.Application.DTOs;
+using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+using MegStore.Infrastructure.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MegStore.Application.Services
@@ -17,6 +15,7 @@ namespace MegStore.Application.Services
         {
             _orderRepository = repository;
         }
+
         public async Task<Order> GetOrderByIdAsync(long orderId)
         {
             return await _orderRepository.GetOrderByIdAsync(orderId);
@@ -32,9 +31,10 @@ namespace MegStore.Application.Services
             await _orderRepository.RemoveProductFromOrderAsync(orderId, productId);
         }
 
-        public async Task UpdateProductInOrderListAsync(long orderId, long productId, int newQuantity)
+        public async Task UpdateOrderWithItemsAsync(long orderId, Order orderDto)
         {
-            await _orderRepository.UpdateProductInOrderListAsync(orderId, productId, newQuantity);
+            await _orderRepository.UpdateOrderWithItemsAsync(orderId, orderDto);
         }
+     
     }
 }

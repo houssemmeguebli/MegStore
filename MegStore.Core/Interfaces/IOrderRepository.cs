@@ -12,7 +12,9 @@ namespace MegStore.Core.Interfaces
         Task<Order> GetOrderByIdAsync(long orderId);
         Task<IEnumerable<Order>> GetAllOrdersAsync();
         Task RemoveProductFromOrderAsync(long orderId, long productId);
-        Task UpdateProductInOrderListAsync(long orderId, long productId, int newQuantity);
+        Task UpdateOrderWithItemsAsync(long orderId, Order orderDto);
+        
+
 
     }
 }

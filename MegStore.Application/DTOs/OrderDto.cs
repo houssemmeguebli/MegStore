@@ -1,4 +1,5 @@
-﻿using MegStore.Core.Entities.ProductFolder;
+﻿using MegStore.Application.DTOs;
+using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace MegStore.Application.DTOs
         public decimal TotlaAmount { get; set; }
         public long? CustomerId { get; set; }
         public int Quantity { get; set; }
-        public IList<ProductDto> Products { get; set; } = new List<ProductDto>();
+   
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
  
 }

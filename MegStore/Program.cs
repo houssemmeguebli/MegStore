@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddDbContext<MegStoreContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole<long>>()
     .AddEntityFrameworkStores<MegStoreContext>()
     .AddDefaultTokenProviders();
+
+// Configure CORS (Ensure only one is used)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -32,7 +35,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
-
 
 // Register application services
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
@@ -43,13 +45,26 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+// AutoMapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Load EmailSettings from configuration
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure JSON serialization options to ignore cycles and references
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.MaxDepth = 64; // Adjust depth as needed
+    });
+
+
 var emailSettings = builder.Configuration.GetSection("EmailSettings");
 
 // Add EmailService to the service collection
@@ -57,6 +72,9 @@ builder.Services.AddSingleton<IEmailService>(new EmailService(
     emailSettings["Username"],
     emailSettings["Password"]
 ));
+
+
+
 
 // Configure JWT authentication
 builder.Services.AddAuthentication(options =>
@@ -77,12 +95,14 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
+    // JWT Bearer Authorization
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"JWT Authorization header using the Bearer scheme.
@@ -132,16 +152,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
+
+app.UseStaticFiles(); // This must be before CORS and Authentication/Authorization
+
+// Apply CORS policy
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication(); // Make sure authentication is enabled
 app.UseAuthorization();
 
 app.MapControllers();
-// Apply CORS policy
-app.UseCors("AllowSpecificOrigin");
-app.UseCors("AllowAllOrigins");
-app.UseStaticFiles();
 
 app.Run();

@@ -2,10 +2,8 @@
 using MegStore.Core.Interfaces;
 using MegStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MegStore.Infrastructure.Repositories
@@ -18,64 +16,110 @@ namespace MegStore.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public async Task<Order> GetOrderByIdAsync(long orderId)
         {
             return await _context.Orders
-                .Include(o => o.Products) // Include products for each order
-                .FirstOrDefaultAsync(o => o.orderId == orderId);
+                      .Include(o => o.OrderItems)
+                       .ThenInclude(oi => oi.Product)  // Include Product details for each OrderItem
+                      .FirstOrDefaultAsync(o => o.orderId == orderId);
         }
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
             return await _context.Orders
-                .Include(o => o.Products) // Include products for each order
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
                 .ToListAsync();
         }
-        // Remove a product from an order
+
         public async Task RemoveProductFromOrderAsync(long orderId, long productId)
         {
-            // Fetch the order including its products
+            // Fetch the order including its order items
             var order = await _context.Orders
-                .Include(o => o.Products)
-                .FirstOrDefaultAsync(o => o.orderId == orderId);
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product) // Optional, if you need product details
+                .FirstOrDefaultAsync(o => o.orderId == orderId); // Ensure property names match
 
             if (order == null)
                 throw new KeyNotFoundException("Order not found");
 
-            // Find the product in the order
-            var orderProduct = order.Products.FirstOrDefault(op => op.productId == productId);
-            if (orderProduct == null)
+            // Find the OrderItem that matches the product
+            var orderItem = order.OrderItems.FirstOrDefault(oi => oi.ProductId == productId);
+            if (orderItem == null)
                 throw new KeyNotFoundException("Product not found in order");
 
-            // Remove the product from the order's product list
-            order.Products.Remove(orderProduct);
+            // Remove the OrderItem from the context
+            _context.OrderItems.Remove(orderItem);
 
-            _context.Orders.Update(order); // Update the order in the context
-            await _context.SaveChangesAsync(); // Save changes to the database
+            // Remove the OrderItem from the order's OrderItems collection
+            order.OrderItems.Remove(orderItem);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
         }
 
-        // Update the quantity or details of a product in the order
-        public async Task UpdateProductInOrderListAsync(long orderId, long productId, int newQuantity)
+        public async Task UpdateOrderWithItemsAsync(long orderId, Order orderDto)
         {
-            // Fetch the order including its products
-            var order = await _context.Orders
-                .Include(o => o.Products)
+            // Fetch the existing order with its items
+            var existingOrder = await _context.Orders
+                .Include(o => o.OrderItems)
                 .FirstOrDefaultAsync(o => o.orderId == orderId);
 
-            if (order == null)
+            if (existingOrder == null)
                 throw new KeyNotFoundException("Order not found");
 
-            // Find the product in the order
-            var orderProduct = order.Products.FirstOrDefault(op => op.productId == productId);
-            if (orderProduct == null)
-                throw new KeyNotFoundException("Product not found in order");
+            // Update order details
+            _context.Entry(existingOrder).CurrentValues.SetValues(orderDto);
 
-            // Update the product quantity
-            orderProduct.ItemQuantiy = newQuantity;
+            // Manage OrderItems
+            var existingOrderItemIds = existingOrder.OrderItems.Select(oi => oi.OrderItemId).ToList();
 
-            _context.Orders.Update(order); // Update the order in the context
-            await _context.SaveChangesAsync(); // Save changes to the database
+            foreach (var updatedOrderItem in orderDto.OrderItems)
+            {
+                if (updatedOrderItem.OrderItemId == 0)
+                {
+                    // New OrderItem
+                    if (updatedOrderItem.Quantity > 0 && updatedOrderItem.TotalPrice > 0)
+                    {
+                        updatedOrderItem.OrderId = orderId; // Set foreign key
+                        _context.OrderItems.Add(updatedOrderItem);
+                    }
+                }
+                else
+                {
+                    // Existing OrderItem
+                    var existingOrderItem = existingOrder.OrderItems
+                        .FirstOrDefault(oi => oi.OrderItemId == updatedOrderItem.OrderItemId);
+
+                    if (existingOrderItem != null)
+                    {
+                        // Update existing OrderItem
+                        existingOrderItem.Quantity = updatedOrderItem.Quantity;
+                        existingOrderItem.TotalPrice = updatedOrderItem.TotalPrice;
+                    }
+                    else
+                    {
+                        throw new KeyNotFoundException($"OrderItem with ID {updatedOrderItem.OrderItemId} not found.");
+                    }
+                }
+            }
+
+            // Remove OrderItems that are not in the updated list
+            var updatedOrderItemIds = new HashSet<long>(orderDto.OrderItems.Where(oi => oi.OrderItemId > 0).Select(oi => oi.OrderItemId));
+            var itemsToRemove = existingOrder.OrderItems.Where(oi => !updatedOrderItemIds.Contains(oi.OrderItemId)).ToList();
+
+            foreach (var itemToRemove in itemsToRemove)
+            {
+                _context.OrderItems.Remove(itemToRemove);
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
         }
+
+
+
 
     }
 }

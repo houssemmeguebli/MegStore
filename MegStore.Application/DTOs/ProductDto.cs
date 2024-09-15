@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MegStore.Core.Entities.ProductFolder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace MegStore.Application.DTOs
 {
     public class ProductDto
     {
-        public long ProductId { get; set; }
+        public long productId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public decimal ProductPrice { get; set; }
@@ -19,6 +20,7 @@ namespace MegStore.Application.DTOs
         public long? CategoryId { get; set; }
         public long? AdminId { get; set; }
         public int ItemQuantiy { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
 
     }
 }
