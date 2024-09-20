@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+/mP+u+ESIscTfLZ1sG+fOkmMSaGOmwkAX+hh+VnquLc9MWaMqvRiwpvNWsLBfkSF1pNIFF525gVb1XcrMIgsQ==",
+  "dgSpecHash": "05wBKL3ebUe79mVvw+1+2GcP2C5vZnJlWFBGnZxymQVEZwGQ9Y+PiPTGoPtWC+veWDfauPb7OBBVy9QGySgEvQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\MegStore.Presentation.csproj",
   "expectedPackageFiles": [
@@ -57,6 +57,7 @@
     "C:\\Users\\megbl\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\mimekit\\4.7.1\\mimekit.4.7.1.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\megbl\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\megbl\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

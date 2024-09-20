@@ -1,5 +1,7 @@
-﻿using MegStore.Core.Entities.ProductFolder;
+﻿using MailKit.Search;
+using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using MegStore.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +20,12 @@ namespace MegStore.Application.Services
             _productRepository = repository;
         }
 
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(long categoryId)
+        {
+            return await _productRepository.GetProductsByCategoryIdAsync(categoryId);
+        }
+
     }
+
 }

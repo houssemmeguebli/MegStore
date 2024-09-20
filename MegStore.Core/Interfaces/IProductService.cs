@@ -9,5 +9,7 @@ namespace MegStore.Core.Interfaces
 {
     public interface IProductService : IService<Product>
     {
+      
+        Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(long categoryId);
     }
 }

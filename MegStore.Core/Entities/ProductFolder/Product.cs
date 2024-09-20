@@ -15,6 +15,8 @@ namespace MegStore.Core.Entities.ProductFolder
         public string productDescription { get; set; } 
         public decimal productPrice { get; set; }
         public string? ImageUrl { get; set; }
+        public IList<string>? ImageUrls { get; set; } = new List<string>();
+
         public int StockQuantity { get; set; }
         public int ItemQuantiy { get; set; }
 
@@ -29,7 +31,7 @@ namespace MegStore.Core.Entities.ProductFolder
         [ForeignKey(nameof(admin))]
         public long? adminId { get; set; }
         public Admin? admin  { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem>? OrderItems { get; set; }
 
 
     }

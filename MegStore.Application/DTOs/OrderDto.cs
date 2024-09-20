@@ -10,12 +10,7 @@ using System.Threading.Tasks;
 
 namespace MegStore.Application.DTOs
 {
-    public enum OrderStatus
-    {
-        Pending,
-        Shipped,
-        Rejected
-    }
+    
     public class OrderDto
     {
         public long OrderId { get; set; }

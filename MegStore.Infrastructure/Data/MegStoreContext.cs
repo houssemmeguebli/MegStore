@@ -19,6 +19,7 @@ namespace MegStore.Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
 
         public MegStoreContext(DbContextOptions<MegStoreContext> options) : base(options)
         {
@@ -28,6 +29,18 @@ namespace MegStore.Infrastructure.Data
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MegStoreContext).Assembly);
             base.OnModelCreating(modelBuilder);
+            
+             modelBuilder.Entity<Order>()
+                .Property(oi => oi.TotlaAmount)
+                .HasColumnType("decimal(18,2)");
+            modelBuilder.Entity<OrderItem>()
+                .Property(oi => oi.TotalPrice)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(oi => oi.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+
             // Apply column type configuration for Cart entity
             modelBuilder.Entity<Cart>()
                 .Property(c => c.TotalAmount)

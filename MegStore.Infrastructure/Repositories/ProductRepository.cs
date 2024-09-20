@@ -1,6 +1,7 @@
 ﻿using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
 using MegStore.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,12 @@ namespace MegStore.Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(long categoryId)
+        {
+            return await _context.Products
+                                 .Where(p => p.categoryId == categoryId)
+                                 .ToListAsync(); 
+        }
+
     }
 }
