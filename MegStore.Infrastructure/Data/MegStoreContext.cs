@@ -57,7 +57,7 @@ namespace MegStore.Infrastructure.Data
                 .HasMany(o => o.OrderItems)
                 .WithOne(oi => oi.Order)
                 .HasForeignKey(oi => oi.OrderId)
-                .OnDelete(DeleteBehavior.ClientNoAction); // Adjust the delete behavior as needed
+                .OnDelete(DeleteBehavior.Cascade); // Adjust the delete behavior as needed
 
             modelBuilder.Entity<OrderItem>()
                 .HasKey(oi => oi.OrderItemId); // Primary Key for OrderItem

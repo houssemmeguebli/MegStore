@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MegStore.Application.DTOs;
+using MegStore.Core.Entities.Users;
 using MegStore.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -69,6 +70,24 @@ namespace MegStore.Presentation.Controllers
             await _userService.DeleteAsync(user);
             return NoContent();
         }
+
+
+        [HttpGet("customerOrders/{customerId}")]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByCustomerIdAsync(long customerId)
+        {
+          
+            var orders = await _userService.GetOrdersByCustomerIdAsync(customerId);
+
+            if (orders == null || !orders.Any())
+            {
+                return NotFound($"No orders found for customer with ID {customerId}");
+            }
+
+            var orderDtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
+
+            return Ok(orderDtos);
+        }
+
     }
 }
 

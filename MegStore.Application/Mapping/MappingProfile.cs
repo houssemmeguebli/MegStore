@@ -34,10 +34,12 @@ namespace MegStore.Application.Mapping
             CreateMap<CouponDto, Coupon>()
                 .ForMember(dest => dest.couponId, opt => opt.Ignore());
 
+            CreateMap<User, UserDto>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+            CreateMap<UserDto, User>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()); 
 
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, UserDto>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Customer,CustomerDto>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MegStore.Core.Entities.ProductFolder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace MegStore.Core.Entities.Users
 {
     public class Customer : User
     {
+        public ICollection<Order> Orders { get; set; }
 
     }
 }

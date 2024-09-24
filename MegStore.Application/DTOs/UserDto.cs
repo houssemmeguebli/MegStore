@@ -12,13 +12,12 @@ namespace MegStore.Application.DTOs
         public long Id { get; set; } 
         public string FullName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public Gender Gender { get; set; }
         public Role Role { get; set; }
-        public UserStatus  Status { get; set; }
+        public UserStatus userStatus { get; set; }
         public DateTime dateOfCreation { get; set; } = DateTime.Now;
 
     }

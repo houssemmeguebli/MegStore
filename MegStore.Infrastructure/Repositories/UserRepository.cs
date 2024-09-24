@@ -1,6 +1,9 @@
-﻿using MegStore.Core.Entities.Users;
+﻿using Azure.Core;
+using MegStore.Core.Entities.ProductFolder;
+using MegStore.Core.Entities.Users;
 using MegStore.Core.Interfaces;
 using MegStore.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +20,20 @@ namespace MegStore.Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(long customerId)
+        {
+            var Orders = await _context.Orders
+                .Where(r => r.customerId == customerId).ToListAsync();
+              
+
+            if (Orders == null || !Orders.Any())
+            {
+                throw new Exception("No orders found for this customer.");
+            }
+
+            return Orders;
+        }
+
+
     }
 }

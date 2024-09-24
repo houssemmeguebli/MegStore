@@ -1,6 +1,7 @@
 ﻿using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Entities.Users;
 using MegStore.Core.Interfaces;
+using MegStore.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,10 @@ namespace MegStore.Application.Services
             _userRepository = repository;
         }
 
+        public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(long customerId)
+        {
+            return await _userRepository.GetOrdersByCustomerIdAsync(customerId);
+        }
+       
     }
 }

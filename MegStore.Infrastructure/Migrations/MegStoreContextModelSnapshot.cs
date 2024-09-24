@@ -226,6 +226,9 @@ namespace MegStore.Infrastructure.Migrations
                     b.Property<long?>("categoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<decimal?>("discountPercentage")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("productDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -501,7 +504,7 @@ namespace MegStore.Infrastructure.Migrations
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Order", b =>
                 {
                     b.HasOne("MegStore.Core.Entities.Users.Customer", "customer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("customerId");
 
                     b.Navigation("customer");
@@ -512,7 +515,7 @@ namespace MegStore.Infrastructure.Migrations
                     b.HasOne("MegStore.Core.Entities.ProductFolder.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.ClientNoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MegStore.Core.Entities.ProductFolder.Product", "Product")
                         .WithMany("OrderItems")
@@ -611,6 +614,11 @@ namespace MegStore.Infrastructure.Migrations
             modelBuilder.Entity("MegStore.Core.Entities.ProductFolder.Product", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("MegStore.Core.Entities.Users.Customer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
