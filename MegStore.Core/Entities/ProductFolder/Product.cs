@@ -32,6 +32,7 @@ namespace MegStore.Core.Entities.ProductFolder
         public long? adminId { get; set; }
         public Admin? admin  { get; set; }
         public ICollection<OrderItem>? OrderItems { get; set; }
+        public ICollection<CartItem>? CartItems { get; set; }
         public decimal? discountPercentage { get; set; } = 0; 
 
 

@@ -11,5 +11,6 @@ namespace MegStore.Core.Interfaces
     public interface IUserRepository : IRepository<User>
     {
         Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(long customerId);
+        Task<List<User>> GetUsersWithRole(int role);
     }
 }

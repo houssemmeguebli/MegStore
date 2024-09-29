@@ -22,8 +22,17 @@ namespace MegStore.Infrastructure.Repositories
         {
             return await _context.Products
                                  .Where(p => p.categoryId == categoryId)
-                                 .ToListAsync(); 
+                                 .ToListAsync();
         }
+        public async Task<List<Product>> GetProductByAdminId(long adminId)
+        {
+            {
+                return await _context.Products
+                                     .Where(p => p.adminId == adminId)
+                                     .ToListAsync();
+            }
+        }
+
 
     }
 }

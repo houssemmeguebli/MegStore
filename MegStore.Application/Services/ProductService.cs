@@ -25,7 +25,10 @@ namespace MegStore.Application.Services
         {
             return await _productRepository.GetProductsByCategoryIdAsync(categoryId);
         }
-
+        public async Task<List<Product>> GetProductByAdminId(long adminId)
+        {
+            return await _productRepository.GetProductByAdminId(adminId);
+        }
     }
 
 }

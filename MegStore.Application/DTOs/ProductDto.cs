@@ -23,6 +23,7 @@ namespace MegStore.Application.DTOs
         public long? AdminId { get; set; }
         public int ItemQuantiy { get; set; }
         public ICollection<OrderItem>? OrderItems { get; set; }
+        public ICollection<CartItem>? CartItems { get; set; }
         public decimal? discountPercentage { get; set; } = 0;
 
     }

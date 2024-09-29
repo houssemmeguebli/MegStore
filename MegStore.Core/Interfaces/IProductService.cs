@@ -11,5 +11,7 @@ namespace MegStore.Core.Interfaces
     {
       
         Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(long categoryId);
+        Task<List<Product>> GetProductByAdminId(long adminId);
+
     }
 }

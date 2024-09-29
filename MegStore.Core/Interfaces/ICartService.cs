@@ -9,5 +9,7 @@ namespace MegStore.Core.Interfaces
 {
     public interface ICartService :IService<Cart>
     {
+        Task<List<Cart>> GetCartByCustomerIdAsync(long customerId);
+       
     }
 }

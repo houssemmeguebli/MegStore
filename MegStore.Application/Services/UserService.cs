@@ -20,6 +20,11 @@ namespace MegStore.Application.Services
             _userRepository = repository;
         }
 
+        public async Task<List<User>> GetUsersWithRole(int role)
+        {
+            return await _userRepository.GetUsersWithRole(role);
+        }
+
         public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(long customerId)
         {
             return await _userRepository.GetOrdersByCustomerIdAsync(customerId);

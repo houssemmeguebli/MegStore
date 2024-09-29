@@ -1,5 +1,6 @@
 ﻿using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using MegStore.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,15 @@ namespace MegStore.Application.Services
 
         public CartService(ICartRepository repository) : base(repository)
         {
-        
+
             _cartRepository = repository;
         }
 
+        public async Task<List<Cart>> GetCartByCustomerIdAsync(long customerId)
+        {
+
+            return await _cartRepository.GetCartByCustomerIdAsync(customerId);
+        }
+      
     }
 }

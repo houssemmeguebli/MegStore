@@ -41,6 +41,20 @@ public class ProductController : ControllerBase
         var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
         return Ok(productDtos);
     }
+    [HttpGet("products/{adminId}")]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductByAdminId(long adminId)
+    {
+        var products = await _productService.GetProductByAdminId(adminId);
+
+        if (products == null)
+        {
+            return NotFound();
+        }
+
+        // Map the products to ProductDto
+        var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
+        return Ok(productDtos);
+    }
 
 
     [HttpGet]

@@ -10,5 +10,6 @@ namespace MegStore.Application.DTOs
     public class CustomerDto : UserDto
     {
         public ICollection<Order> Orders { get; set; }
+        public ICollection<Cart>? Carts { get; set; }
     }
 }

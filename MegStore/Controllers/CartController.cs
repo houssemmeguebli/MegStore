@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+
 
 namespace MegStore.Presentation.Controllers
 {
@@ -17,11 +19,14 @@ namespace MegStore.Presentation.Controllers
     {
         private readonly ICartService _cartService;
         private readonly IMapper _mapper;
+        private readonly ILogger<CartController> _logger; 
 
-        public CartController(ICartService cartService, IMapper mapper)
+
+        public CartController(ICartService cartService, IMapper mapper, ILogger<CartController> logger)
         {
             _cartService = cartService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -63,6 +68,27 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving cart: {ex.Message}");
             }
         }
+        [HttpGet("/customerCarts/{customerId}")]
+        public async Task<ActionResult<IEnumerable<CartDto>>> GetCartsForCustomer(long customerId)
+        {
+            // Fetch the list of carts by customer ID
+            var carts = await _cartService.GetCartByCustomerIdAsync(customerId);
+
+            if (carts == null )
+            {
+                return NotFound("Carts not found for the given customer.");
+            }
+
+            // Map the list of Cart entities to a list of CartDto objects
+            var cartDtos = _mapper.Map<IEnumerable<CartDto>>(carts);
+
+            return Ok(cartDtos);
+        }
+
+
+
+
+
 
         [HttpPost]
         public async Task<ActionResult<CartDto>> CreateCart(CartDto cartDto)

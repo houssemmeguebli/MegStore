@@ -31,6 +31,17 @@ namespace MegStore.Presentation.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
+        [HttpGet("users/{role}")]
+        public async Task<ActionResult<List<UserDto>>> GetUsersWithRole(int role)
+        {
+            var users = await _userService.GetUsersWithRole(role);
+            if (users == null || !users.Any())
+            {
+                return NotFound($"There is no users role  {role}");
+            }
+            var usersDto = _mapper.Map<List<UserDto>>(users);
+            return Ok(usersDto);
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
         {

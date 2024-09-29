@@ -10,5 +10,6 @@ namespace MegStore.Core.Interfaces
     public interface IProductRepository : IRepository<Product>
     {
         Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(long categoryId);
+        Task<List<Product>> GetProductByAdminId(long adminId);
     }
 }

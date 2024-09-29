@@ -10,6 +10,7 @@ namespace MegStore.Core.Entities.Users
     public class Customer : User
     {
         public ICollection<Order> Orders { get; set; }
+        public ICollection<Cart>? Carts { get; set; }
 
     }
 }

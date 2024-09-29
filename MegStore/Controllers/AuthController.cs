@@ -150,7 +150,9 @@ namespace MegStore.Presentation.Controllers
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("id", user.Id.ToString()),
-                new Claim("role", roles.FirstOrDefault() ?? "User")
+                new Claim("fullName", user.fullName),
+                new Claim("role", user.role.ToString()),
+          
             };
 
             foreach (var role in roles)

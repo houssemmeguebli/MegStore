@@ -33,6 +33,15 @@ namespace MegStore.Infrastructure.Repositories
 
             return Orders;
         }
+        public async Task<List<User>> GetUsersWithRole(int role)
+        {
+    
+            Role userRole = (Role)role;
+            return await _context.Users
+                                 .Where(u => u.role == userRole)
+                                 .ToListAsync();
+        }
+
 
 
     }
