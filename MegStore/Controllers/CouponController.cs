@@ -2,8 +2,10 @@
 using MegStore.Application.DTOs;
 using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 namespace MegStore.Presentation.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = "AdminOrSuperAdmin")]
     [ApiController]
     public class CouponController : ControllerBase
     {
@@ -24,7 +27,6 @@ namespace MegStore.Presentation.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/coupon
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CouponDto>>> GetAll()
         {
@@ -44,7 +46,7 @@ namespace MegStore.Presentation.Controllers
             }
         }
 
-        // GET: api/coupon/{couponId}
+    
         [HttpGet("{couponId}")]
         public async Task<ActionResult<CouponDto>> GetCouponById(long couponId)
         {
@@ -63,9 +65,9 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving coupon: {ex.Message}");
             }
         }
-
-        // POST: api/coupon
+    
         [HttpPost]
+        [EnableRateLimiting("fixed")]
         public async Task<ActionResult<CouponDto>> CreateCoupon([FromBody] CouponDto couponDto)
         {
             try
@@ -86,8 +88,7 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding coupon: {ex.Message}");
             }
         }
-
-        // PUT: api/coupon/{couponId}
+        [EnableRateLimiting("fixed")]
         [HttpPut("{couponId}")]
         public async Task<IActionResult> UpdateCoupon(long couponId, [FromBody] CouponDto couponDto)
         {
@@ -114,8 +115,7 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error updating coupon: {ex.Message}");
             }
         }
-
-        // DELETE: api/coupon/{couponId}
+        [EnableRateLimiting("fixed")]
         [HttpDelete("{couponId}")]
         public async Task<IActionResult> DeleteCoupon(long couponId)
         {

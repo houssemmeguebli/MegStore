@@ -5,9 +5,11 @@ using MegStore.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+
 
 namespace MegStore.Presentation.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -20,6 +22,7 @@ namespace MegStore.Presentation.Controllers
             _userService = userService;
             _mapper = mapper;
         }
+        [Authorize]
         [HttpGet("{userId}")]
         public async Task<ActionResult<UserDto>> GetUserById(long userId)
         {
@@ -31,6 +34,8 @@ namespace MegStore.Presentation.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
+
+        [Authorize(Policy = "AdminOrSuperAdmin")]
         [HttpGet("users/{role}")]
         public async Task<ActionResult<List<UserDto>>> GetUsersWithRole(int role)
         {
@@ -42,6 +47,7 @@ namespace MegStore.Presentation.Controllers
             var usersDto = _mapper.Map<List<UserDto>>(users);
             return Ok(usersDto);
         }
+        [Authorize(Policy = "SuperAdminOnly")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
         {
@@ -53,7 +59,9 @@ namespace MegStore.Presentation.Controllers
             var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
             return Ok(usersDto);
         }
+        [Authorize]
         [HttpPut("{userId}")]
+        [EnableRateLimiting("fixed")]
         public async Task<IActionResult> UpdateUser(long userId, UserDto userDto)
         {
             var existingUser = await _userService.GetByIdAsync(userId);
@@ -69,6 +77,8 @@ namespace MegStore.Presentation.Controllers
             return NoContent();
         }
 
+        [Authorize(Policy = "SuperAdminOnly")]
+        [EnableRateLimiting("fixed")]
         [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteUser(long userId)
         {
@@ -82,7 +92,7 @@ namespace MegStore.Presentation.Controllers
             return NoContent();
         }
 
-
+        [Authorize]
         [HttpGet("customerOrders/{customerId}")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByCustomerIdAsync(long customerId)
         {

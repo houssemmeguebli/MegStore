@@ -2,8 +2,10 @@
 using MegStore.Application.DTOs;
 using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,7 @@ namespace MegStore.Presentation.Controllers
             _orderItemService = orderItemService;
         }
 
+        [Authorize(Policy = "AdminOrSuperAdmin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetAll()
         {
@@ -45,7 +48,7 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving orders: {ex.Message}");
             }
         }
-
+        [Authorize]
         [HttpGet("{orderId}")]
         public async Task<ActionResult<OrderDto>> GetOrderById(long orderId)
         {
@@ -64,7 +67,9 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving order: {ex.Message}");
             }
         }
+        [Authorize]
         [HttpPost]
+        [EnableRateLimiting("fixed")]
         public async Task<ActionResult<OrderDto>> CreateOrder(OrderDto orderDto)
         {
             try
@@ -98,6 +103,8 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding order: {ex.Message}");
             }
         }
+        [Authorize]
+        [EnableRateLimiting("fixed")]
         [HttpPut("{orderId}")]
         public async Task<IActionResult> UpdateOrder(long orderId, [FromBody] Order orderDto)
         {
@@ -130,7 +137,8 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the order.");
             }
         }
-
+        [Authorize]
+        [EnableRateLimiting("fixed")]
         [HttpDelete("{orderId}")]
         public async Task<IActionResult> DeleteOrder(long orderId)
         {
@@ -151,6 +159,7 @@ namespace MegStore.Presentation.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("Orderproducts/{id}")]
         public async Task<IActionResult> GetOrderproductsById(long id)
         {
@@ -173,8 +182,9 @@ namespace MegStore.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving order products: {ex.Message}");
             }
         }
-
+        [Authorize]
         [HttpDelete("{orderId}/products/{productId}")]
+        [EnableRateLimiting("fixed")]
         public async Task<IActionResult> RemoveProductFromOrder(long orderId, long productId)
         {
             try

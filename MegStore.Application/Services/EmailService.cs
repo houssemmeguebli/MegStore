@@ -1,19 +1,16 @@
 ﻿using MegStore.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
-using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace MegStore.Application.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly string _smtpServer = "smtp.office365.com";
+        // Updated SMTP server settings for Zoho Mail
+        private readonly string _smtpServer = "smtp.zoho.com";
         private readonly int _smtpPort = 587; // Port for TLS
         private readonly string _username;
         private readonly string _password;
@@ -27,7 +24,7 @@ namespace MegStore.Application.Services
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("TTAPP", _username));
+            emailMessage.From.Add(new MailboxAddress("MEGSTORE", _username));
             emailMessage.To.Add(new MailboxAddress("", toEmail));
             emailMessage.Subject = subject;
 
@@ -36,12 +33,13 @@ namespace MegStore.Application.Services
                 Text = $"<strong>{message}</strong>"
             };
 
-            using (var client = new MailKit.Net.Smtp.SmtpClient())
+            using (var client = new SmtpClient())
             {
                 try
                 {
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
+                    // Connect to Zoho Mail SMTP server
                     await client.ConnectAsync(_smtpServer, _smtpPort, MailKit.Security.SecureSocketOptions.StartTls);
                     await client.AuthenticateAsync(_username, _password);
                     await client.SendAsync(emailMessage);

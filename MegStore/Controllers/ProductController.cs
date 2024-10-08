@@ -11,6 +11,8 @@ using MegStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.RateLimiting;
 
 
 
@@ -26,7 +28,7 @@ public class ProductController : ControllerBase
         _productService = productService;
         _mapper = mapper;
     }
-
+  
     [HttpGet("category/{categoryId}")]
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategoryId(long categoryId)
     {
@@ -41,6 +43,7 @@ public class ProductController : ControllerBase
         var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
         return Ok(productDtos);
     }
+    [Authorize(Policy = "AdminOrSuperAdmin")]
     [HttpGet("products/{adminId}")]
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductByAdminId(long adminId)
     {
@@ -96,6 +99,8 @@ public class ProductController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving product: {ex.Message}");
         }
     }
+    [EnableRateLimiting("fixed")]
+    [Authorize(Policy = "AdminOrSuperAdmin")]
     [HttpPost]
     public async Task<ActionResult<ProductDto>> CreateProduct([FromForm] ProductDto productDto, List<IFormFile> imageFiles)
     {
@@ -160,6 +165,8 @@ public class ProductController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding product: {ex.Message}");
         }
     }
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [EnableRateLimiting("fixed")]
     [HttpPut("{productId}")]
     public async Task<ActionResult<ProductDto>> UpdateProduct(long productId, [FromForm] ProductDto productDto, List<IFormFile> imageFiles)
     {
@@ -233,7 +240,8 @@ public class ProductController : ControllerBase
     }
 
 
-
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [EnableRateLimiting("fixed")]
     [HttpDelete("{productId}")]
     public async Task<IActionResult> DeleteProduct(long productId)
     {
@@ -253,8 +261,8 @@ public class ProductController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting product: {ex.Message}");
         }
     }
-
-        [HttpDelete("{productId}/delete-image")]
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [HttpDelete("{productId}/delete-image")]
         public async Task<ActionResult<ProductDto>> DeleteImage(long productId, [FromQuery] string imageUrlToDelete)
         {
             try

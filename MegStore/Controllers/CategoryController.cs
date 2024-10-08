@@ -2,8 +2,10 @@
 using MegStore.Application.DTOs;
 using MegStore.Core.Entities.ProductFolder;
 using MegStore.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +64,9 @@ namespace MegStore.Presentation.Controllers
             }
         }
 
+        [EnableRateLimiting("fixed")]
         [HttpPost]
+        [Authorize(Policy = "AdminOrSuperAdmin")]
         public async Task<ActionResult<CategoryDto>> CreateCategory(CategoryDto categoryDto)
         {
             try
@@ -85,6 +89,8 @@ namespace MegStore.Presentation.Controllers
         }
 
         [HttpPut("{categoryId}")]
+        [Authorize(Policy = "AdminOrSuperAdmin")]
+        [EnableRateLimiting("fixed")]
         public async Task<IActionResult> UpdateCategory(long categoryId, CategoryDto categoryDto)
         {
             try
@@ -112,6 +118,8 @@ namespace MegStore.Presentation.Controllers
         }
 
         [HttpDelete("{categoryId}")]
+        [Authorize(Policy = "AdminOrSuperAdmin")]
+        [EnableRateLimiting("fixed")]
         public async Task<IActionResult> DeleteCategory(long categoryId)
         {
             try
