@@ -4,6 +4,7 @@ using MegStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MegStore.Infrastructure.Migrations
 {
     [DbContext(typeof(MegStoreContext))]
-    partial class MegStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20241010092024_ProductDeleteMigration")]
+    partial class ProductDeleteMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -587,7 +590,7 @@ namespace MegStore.Infrastructure.Migrations
                     b.HasOne("MegStore.Core.Entities.ProductFolder.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Order");
 

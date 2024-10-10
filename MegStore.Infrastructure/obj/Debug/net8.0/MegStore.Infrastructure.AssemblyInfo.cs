@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MegStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f411e7f2b55896336bd51905da6fceb0cd90cba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+683440ca2e1f1be538c64098c80d968ee98789ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("MegStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MegStore.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

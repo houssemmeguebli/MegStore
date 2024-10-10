@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DS3qmIVAK8tkPPgm3UuESU8d/YpuhVBfH+5Z+QWDJ38=",
+  "Hash": "C6XEXYtvE20G/TBudJPS0AZmFtl2CDrv5V1Ssvb0RtE=",
   "Source": "MegStore.Presentation",
   "BasePath": "_content/MegStore.Presentation",
   "Mode": "Default",
@@ -34,6 +34,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\07127f04-949b-4d24-9816-7cbd57e774ff_C.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\090c85b6-81d0-498e-9522-00cf59df54d8_Blank diagram - Higher level UML deployment diagram (2).png",
+      "SourceId": "MegStore.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\",
+      "BasePath": "_content/MegStore.Presentation",
+      "RelativePath": "uploads/products/090c85b6-81d0-498e-9522-00cf59df54d8_Blank diagram - Higher level UML deployment diagram (2).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\090c85b6-81d0-498e-9522-00cf59df54d8_Blank diagram - Higher level UML deployment diagram (2).png"
     },
     {
       "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\0c04be11-4b41-416c-99ca-813dc15147b6_spring-boot-icon-2048x2046-hlpnsm8r.png",
@@ -186,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\products\\1d425d7b-6b90-4073-b4ab-93c1ea7548b7_tshirt2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\1ebe8363-5729-47f6-98b7-77dada33a9a0_Blank diagram - Higher level UML deployment diagram (1).png",
+      "SourceId": "MegStore.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\",
+      "BasePath": "_content/MegStore.Presentation",
+      "RelativePath": "uploads/products/1ebe8363-5729-47f6-98b7-77dada33a9a0_Blank diagram - Higher level UML deployment diagram (1).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\products\\1ebe8363-5729-47f6-98b7-77dada33a9a0_Blank diagram - Higher level UML deployment diagram (1).png"
     },
     {
       "Identity": "C:\\Users\\megbl\\Source\\Repos\\MegStore\\MegStore\\wwwroot\\uploads\\products\\21abbda9-b684-4bf5-966d-e1cde3a16888_iphone-12_specs__ffy8c0h8c2ai_og.png",
